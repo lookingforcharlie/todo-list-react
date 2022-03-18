@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-
 
 .completed {
   text-decoration: line-through;
-  color: gray; 
-  /* text-shadow: 0 0 1px rgba(0, 0, 0, 0.75); */
+  color: gray;
 }
 
 .todoItem {
