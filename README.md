@@ -1,7 +1,10 @@
-# Getting Started with Create React App
+# Todo List Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pure React.js
 
-## Available Scripts
+## Version and Date
 
-In the project directory, you can run:
+Version: 1.0
+Date: May 17, 2022
+
+## Update Information
