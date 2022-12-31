@@ -1,14 +1,15 @@
-import "./App.css";
-import React from "react";
-import TodoList from "./TodoList";
-import { useState, useRef, useEffect } from "react";
-import Time from "./Time";
+import React, { useEffect, useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import './App.css';
+import Time from './Time';
+import TodoList from './TodoList';
 
-const LOCAL_STORAGE_KEY = "saveTodoItems";
+const LOCAL_STORAGE_KEY = 'saveTodoItems';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const todoNameRef = useRef();
+  const left = todos.filter((todo) => !todo.isComplete).length; // count the number of todos that are not complete
 
   // Only call this method once when the page loads
   // This useEffect for getting stored item must run first compared to localStorage.setItem
@@ -27,14 +28,14 @@ function App() {
   const handleAddTodo = () => {
     const name = todoNameRef.current.value;
     const tempTodos = [...todos];
-    if (name.trim() === "") return;
+    if (name.trim() === '') return;
     const readyForSet = [
       ...tempTodos,
-      { id: Date.now(), name: name, isComplete: false },
+      { id: uuidv4(), name: name, isComplete: false },
     ];
     setTodos(readyForSet);
     todoNameRef.current.value = null;
-    document.querySelector(".todoKeyword").focus();
+    document.querySelector('.todoKeyword').focus();
   };
 
   // function to edit todo item. Using find() return reference behavior
@@ -68,18 +69,26 @@ function App() {
   return (
     <div>
       <h2>Charlie's Todo List</h2>
-      <Time />
-      <input
-        type='text'
-        ref={todoNameRef}
-        className='todoKeyword'
-        autoFocus
-      ></input>
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClear}>Clear Completed</button>
+      <div className='time'>
+        <Time />
+      </div>
+      <div>
+        <input
+          type='text'
+          ref={todoNameRef}
+          className='todoKeyword'
+          autoFocus
+        ></input>
+        <button onClick={handleAddTodo} className='addbtn'>
+          Add Todo
+        </button>
+        <button onClick={handleClear}>Clear Completed</button>
+      </div>
       <hr></hr>
       <TodoList todos={todos} todoToggle={todoToggle} editTodo={editTodo} />
-      <p>{todos.filter((todo) => !todo.isComplete).length} Todo(s) Left</p>
+      <p>
+        {left} {left > 1 ? 'Todos' : 'Todo'} left
+      </p>
     </div>
   );
 }
